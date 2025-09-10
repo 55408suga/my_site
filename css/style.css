@@ -3,7 +3,6 @@ body {
     font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace;
     line-height: 1.8;
     margin: 0;
-    background-color: #000; /* Black background for the base */
     color: #eee; /* Light text color for readability */
 }
 
