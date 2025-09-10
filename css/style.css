@@ -79,3 +79,9 @@ li:hover {
     background-color: rgba(0, 80, 0, 0.7);
     transform: translateX(5px);
 }
+
+.skill-logo {
+    height: 1.2em;
+    margin-right: 10px;
+    vertical-align: middle;
+}
