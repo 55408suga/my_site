@@ -18,7 +18,7 @@ canvas#matrix {
 /* Portfolio Content Styling */
 .container {
     max-width: 800px;
-    margin: 40px auto;
+    margin: 100px auto 40px;
     padding: 30px;
     /* Semi-transparent dark background to see the animation through */
     background-color: rgba(10, 25, 10, 0.85);
@@ -91,10 +91,15 @@ li:hover {
 
 /* Navbar */
 .navbar {
+    background-color: rgba(5, 15, 5, 0.95); /* Darker, more opaque background */
     border-bottom: 1px solid #0F0;
-    padding: 10px 0;
-    margin-bottom: 20px;
+    padding: 15px 0; /* Increased padding */
     text-align: center;
+    position: fixed; /* Fix to top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's on top */
 }
 
 .navbar ul {
@@ -105,7 +110,7 @@ li:hover {
 }
 
 .navbar li {
-    margin: 0 15px;
+    margin: 0 20px; /* Increased margin */
     background-color: transparent;
     border: none;
     padding: 0;
@@ -114,10 +119,12 @@ li:hover {
 .navbar a {
     color: #0F0;
     text-decoration: none;
-    font-size: 1.2em;
-    transition: color 0.3s;
+    font-size: 1.3em; /* Slightly larger font */
+    font-weight: bold; /* Bolder font */
+    transition: color 0.3s, text-shadow 0.3s;
 }
 
 .navbar a:hover {
     color: #9f9;
+    text-shadow: 0 0 5px #0F0; /* Add a glow effect on hover */
 }
