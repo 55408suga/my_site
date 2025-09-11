@@ -88,3 +88,36 @@ li:hover {
     object-fit: contain;
     margin-right: 10px;
 }
+
+/* Navbar */
+.navbar {
+    border-bottom: 1px solid #0F0;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+.navbar li {
+    margin: 0 15px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.navbar a {
+    color: #0F0;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #9f9;
+}
