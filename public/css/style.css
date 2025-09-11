@@ -128,3 +128,17 @@ li:hover {
     color: #9f9;
     text-shadow: 0 0 5px #0F0; /* Add a glow effect on hover */
 }
+
+.btn-detail {
+    background-color: #0F0;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.btn-detail:hover {
+    background-color: #9f9;
+}
