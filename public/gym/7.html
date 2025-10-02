@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= gym.name %> - 詳細</title>
+    <title>all fours GYM (現: Rock Spot) - 詳細</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <canvas id="matrix"></canvas>
     <nav class="navbar">
         <ul>
-            <li><a href="/">ホーム</a></li>
-            <li><a href="/bouldering">ボルダリング</a></li>
+            <li><a href="/index.html">ホーム</a></li>
+            <li><a href="/bouldering.html">ボルダリング</a></li>
         </ul>
     </nav>
     <div class="container">
         <header>
-            <h1><%= gym.name %></h1>
+            <h1>all fours GYM (現: Rock Spot)</h1>
         </header>
 
         <div class="section">
             <h2>詳細情報</h2>
             <ul>
-                <li><strong>ウェブサイト:</strong> <a href="<%= gym.website %>" target="_blank"><%= gym.website %></a></li>
-                <li><strong>料金:</strong> <%= gym.price %></li>
-                <li><strong>Google評価:</strong> <%= gym.googleRating %></li>
+                <li><strong>ウェブサイト:</strong> <a href="http://allfoursgym.com/" target="_blank">http://allfoursgym.com/</a></li>
+                <li><strong>料金:</strong> 学生料金 1,400円 (大学生)</li>
+                <li><strong>Google評価:</strong> 評価なし</li>
             </ul>
         </div>
 
@@ -37,7 +37,7 @@
                 loading="lazy"
                 allowfullscreen
                 referrerpolicy="no-referrer-when-downgrade"
-                src="<%= gym.googleMapEmbed %>">
+                src="https://maps.google.com/maps?q=神奈川県横浜市中区本牧原15-6 グロブナースクエア地下1階&output=embed">
             </iframe>
         </div>
     </div>
