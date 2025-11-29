@@ -1,9 +1,10 @@
 /* General Body & Animation Canvas */
 body {
     font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace;
-    line-height: 1.8;
+    line-height: 1.6;
     margin: 0;
-    color: #eee; /* Light text color for readability */
+    color: #eee;
+    background-color: #000;
 }
 
 canvas#matrix {
@@ -12,74 +13,96 @@ canvas#matrix {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Places canvas behind other content */
+    z-index: -1;
 }
 
-/* Portfolio Content Styling */
-.container {
-    max-width: 800px;
+.main-container {
+    display: flex;
+    max-width: 1200px;
     margin: 40px auto;
-    padding: 30px;
-    /* Semi-transparent dark background to see the animation through */
     background-color: rgba(10, 25, 10, 0.85);
-    border: 1px solid #0F0; /* Green border */
+    border: 1px solid #0F0;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 255, 0, 0.2);
 }
 
-header {
-    text-align: center;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #0F0;
-    padding-bottom: 20px;
+.sidebar {
+    width: 300px;
+    padding: 20px;
+    border-right: 1px solid #0F0;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    color: #0F0; /* Green to match the theme */
-    text-shadow: 0 0 5px #0F0;
+.main-content {
+    flex: 1;
+    padding: 20px;
 }
 
-header p {
-    margin: 5px 0 0;
-    color: #9f9; /* Lighter green */
-    font-size: 1.1em;
-}
-
-h2 {
-    font-size: 1.8em;
+h1, h2, h3 {
     color: #0F0;
-    border-bottom: 3px solid #0F0;
-    padding-bottom: 5px;
-    margin-top: 40px;
     text-shadow: 0 0 3px #0F0;
 }
 
-.section {
-    margin-bottom: 25px;
+h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+    border-bottom: 2px solid #0F0;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+h3 {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+a {
+    color: #0F0;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #9f9;
 }
 
 ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
-li {
-    background-color: rgba(0, 50, 0, 0.5);
-    margin-bottom: 8px;
-    padding: 12px 15px;
-    border-radius: 5px;
-    border-left: 5px solid #0F0;
-    color: #eee;
-    transition: background-color 0.3s, transform 0.3s;
-    display: flex;
-    align-items: center;
+.sidebar .profile {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #0F0;
 }
 
-li:hover {
-    background-color: rgba(0, 80, 0, 0.7);
-    transform: translateX(5px);
+.sidebar .profile p {
+    color: #9f9;
+}
+
+.contacts ul {
+    margin-top: 10px;
+}
+
+.contacts li {
+    margin-bottom: 10px;
+}
+
+.contacts i {
+    margin-right: 10px;
+}
+
+.tech-skills ul {
+    margin-top: 10px;
+}
+
+.tech-skills li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .skill-logo {
@@ -89,35 +112,34 @@ li:hover {
     margin-right: 10px;
 }
 
-/* Navbar */
-.navbar {
-    border-bottom: 1px solid #0F0;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    text-align: center;
+.interests ul {
+    margin-top: 10px;
 }
 
-.navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: inline-flex;
+.interests li {
+    background-color: rgba(0, 50, 0, 0.5);
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border-left: 5px solid #0F0;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.navbar li {
-    margin: 0 15px;
-    background-color: transparent;
-    border: none;
-    padding: 0;
+.interests li:hover {
+    background-color: rgba(0, 80, 0, 0.7);
+    transform: translateX(5px);
 }
 
-.navbar a {
+.interests li a {
+    display: block;
+    padding: 12px 15px;
+    color: #eee;
+}
+
+.interests li a strong {
     color: #0F0;
-    text-decoration: none;
-    font-size: 1.2em;
-    transition: color 0.3s;
 }
 
-.navbar a:hover {
-    color: #9f9;
+.interests li a span {
+    color: #ccc;
+    font-size: 0.9em;
 }

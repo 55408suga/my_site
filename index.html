@@ -5,42 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kazushi Suga's Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <canvas id="matrix"></canvas>
-    <div class="container">
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html">ホーム</a></li>
-                <li><a href="bouldering.html">ボルダリング</a></li>
-            </ul>
-        </nav>
-        <header>
-            <h1>Kazushi Suga</h1>
-            <p>慶應大学理工学部 1年生</p>
-        </header>
-
-        <div class="section">
-            <h2>自己紹介</h2>
-            <p>
-                はじめまして、Kazushi Sugaです。慶應義塾大学理工学部に通う1年生です。
-                プログラミングに情熱を注いでおり、現在はNode.jsとReactを用いたフルスタック開発を学んでいます。
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>趣味</h2>
-            <p>趣味はボルダリングです。体と頭を同時に使う楽しさに魅了されています。</p>
-        </div>
-
-        <div class="section">
-            <h2>スキル</h2>
-            <ul>
-                <li>プログラミング</li>
-                <li><img src="https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg" class="skill-logo">Node.js (学習中)</li>
-                <li><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" class="skill-logo">React (学習中)</li>
-            </ul>
-        </div>
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="profile">
+                    <h1>Kazushi Suga</h1>
+                    <p>慶應大学理工学部 1年生</p>
+                </div>
+                <div class="contacts">
+                    <h2>Contacts</h2>
+                    <ul>
+                        <li><a href="https://github.com/55408suga"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="tech-skills">
+                    <h2>Skills</h2>
+                    <ul>
+                        <li><img src="https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg" class="skill-logo">Node.js (学習中)</li>
+                        <li><img src="https://www.python.org/static/community_logos/python-powered-w-100x40.png" class="skill-logo" style="width: 50px; height: 20px;">Python/Flask (学習中)</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+        <main class="main-content">
+            <section class="summary">
+                <h2>自己紹介</h2>
+                <p>
+                    はじめまして、Kazushi Sugaです。慶應義塾大学理工学部に通う1年生です。
+                    プログラミングに情熱を注いでおり、現在はPython/Flaskを用いたフルスタック開発を学んでいます。
+                </p>
+            </section>
+            <section class="interests">
+                <h2>趣味</h2>
+                <p>趣味はボルダリングです。体と頭を同時に使う楽しさに魅了されています。</p>
+                <h3>横浜市のボルダリングジム</h3>
+                <ul>
+                    <li><a href="http://xx-speedy.com/" target="_blank"><strong>ボルダリングジム Speedy:</strong> <span>東戸塚駅近くのアットホームなジム。本物の外岩感覚で登れる「白鯨ボルダー」が特徴。</span></a></li>
+                    <li><a href="https://www.d-b-c.jp/top/tsunashima/" target="_blank"><strong>ディーボルダリング横浜綱島:</strong> <span>綱島駅から徒歩2分。シャワールームやドリンクバーも完備。</span></a></li>
+                    <li><a href="https://www.mammut.jp/store-locator/bouldering-gym" target="_blank"><strong>MAMMUT（マムート）ボルダリングジム横浜:</strong> <span>みなとみらい線「日本大通り駅」から徒歩4分。</span></a></li>
+                    <li><a href="https://www.boulderinggymshare.com/" target="_blank"><strong>ボルダリングジムシェア:</strong> <span>京急線「鶴見市場駅」から徒歩6分。神奈川最大級の広さ。</span></a></li>
+                    <li><a href="http://pump-climbing.com/gym/bpump2/" target="_blank"><strong>B-PUMP横浜店:</strong> <span>横浜駅から徒歩10分。予約不要で体験クライミングが可能。</span></a></li>
+                    <li><a href="http://www.project-climbing.com/" target="_blank"><strong>クライミングジム プロジェクト:</strong> <span>横浜線「鴨居駅」から徒歩16分。</span></a></li>
+                    <li><a href="https://tokyo-climbing.com/" target="_blank"><strong>Rock Spot (formerly all fours GYM):</strong> <span>世界初の「四足教室専用レーン」があるジム。</span></a></li>
+                    <li><a href="https://folkboulderinggym.com/" target="_blank"><strong>folk bouldering gym:</strong> <span>室内でボルダリングを楽しめるクライミングジム。</span></a></li>
+                    <li><a href="https://climbingbum.jp/yokohama/" target="_blank"><strong>クライミングバム横浜店:</strong> <span>高さが怖い方でも楽しめるジム。</span></a></li>
+                </ul>
+            </section>
+        </main>
     </div>
     <script src="js/matrix.js"></script>
 </body>
