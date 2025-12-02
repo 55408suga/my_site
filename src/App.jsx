@@ -9,7 +9,7 @@ import './App.css';
  */
 const PORTFOLIO_DATA = {
   profile: {
-    name: "Keio Student", // 表示名
+    name: "Kazushi Suga", // 表示名
     role: "Student Engineer",
     university: "慶應義塾大学 理工学部",
     // 自己紹介文
