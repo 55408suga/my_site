@@ -1,0 +1,24 @@
+---
+import { profile } from '@/data/profile';
+
+interface Props {
+  rights: string;
+}
+
+const { rights } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="mx-auto mt-24 mb-12 max-w-2xl px-6 text-xs text-zinc-500">
+  <div class="border-t border-zinc-800 pt-4">
+    {rights} · {year} ·
+    <a
+      href={`https://github.com/${profile.github}`}
+      class="transition-colors hover:text-amber-400"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      github.com/{profile.github}
+    </a>
+  </div>
+</footer>

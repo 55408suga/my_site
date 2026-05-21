@@ -12,6 +12,17 @@ dist
 dist-ssr
 *.local
 
+# Astro
+.astro/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Build cache for GH repos (regenerated on every build)
+src/data/repos.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

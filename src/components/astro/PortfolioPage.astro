@@ -1,0 +1,103 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Section from './Section.astro';
+import RepoCard from './RepoCard.astro';
+import SkillBadge from './SkillBadge.astro';
+import SocialLink from './SocialLink.astro';
+import { profile } from '@/data/profile';
+import { SKILLS } from '@/lib/types';
+import { fetchProjectRepos } from '@/lib/github';
+import type { Locale, LocaleContent } from '@/lib/types';
+
+interface Props {
+  locale: Locale;
+  content: LocaleContent;
+}
+
+const { locale, content } = Astro.props;
+const repos = await fetchProjectRepos(profile.repoAllowlist);
+const displayName = locale === 'ja' ? profile.name.ja : profile.name.en;
+---
+
+<BaseLayout locale={locale} content={content}>
+  <Header current={locale} switcher={content.switcher} />
+  <main>
+    <Section id="about" title={content.about.title}>
+      <p class="text-xl font-light text-zinc-100">{displayName}</p>
+      <p class="mt-1 text-sm text-zinc-500">{content.about.role}</p>
+      <p class="mt-6 text-sm leading-7 text-zinc-300">{content.about.bio}</p>
+    </Section>
+
+    <Section id="education" title={content.education.title}>
+      <ul class="space-y-4 text-sm">
+        {
+          content.education.items.map((item) => (
+            <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+              <span class="w-32 shrink-0 text-zinc-500">{item.period}</span>
+              <div>
+                <p class="text-zinc-200">{item.institution}</p>
+                {item.detail && <p class="text-zinc-500">{item.detail}</p>}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+
+    <Section id="experience" title={content.experience.title}>
+      {
+        content.experience.items.length === 0 ? (
+          <p class="text-sm text-zinc-500">{content.experience.placeholder}</p>
+        ) : (
+          <ul class="space-y-4 text-sm">
+            {content.experience.items.map((item) => (
+              <li class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                <span class="w-32 shrink-0 text-zinc-500">{item.period}</span>
+                <div>
+                  <p class="text-zinc-200">
+                    {item.role} · {item.company}
+                  </p>
+                  <p class="text-zinc-500">{item.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </Section>
+
+    <Section id="skills" title={content.skills.title} label={content.skills.label}>
+      <div class="flex flex-wrap gap-2">
+        {SKILLS.map((s) => <SkillBadge label={s} />)}
+      </div>
+    </Section>
+
+    <Section id="projects" title={content.projects.title} label={content.projects.label}>
+      {
+        repos.length === 0 ? (
+          <p class="text-sm text-zinc-500">{content.projects.empty}</p>
+        ) : (
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {repos.map((repo) => (
+              <RepoCard repo={repo} locale={locale} />
+            ))}
+          </div>
+        )
+      }
+    </Section>
+
+    <Section id="contact" title={content.contact.title}>
+      <p class="text-sm text-zinc-400">{content.contact.text}</p>
+      <div class="mt-4 flex flex-wrap gap-4">
+        {
+          profile.socials.map((s) => (
+            <SocialLink kind={s.kind} label={s.label} url={s.url} />
+          ))
+        }
+      </div>
+    </Section>
+  </main>
+  <Footer rights={content.footer.rights} />
+</BaseLayout>

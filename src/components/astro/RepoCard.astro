@@ -1,0 +1,43 @@
+---
+import type { Locale, RepoCard } from '@/lib/types';
+
+interface Props {
+  repo: RepoCard;
+  locale: Locale;
+}
+
+const { repo, locale } = Astro.props;
+const dateFmt = new Intl.DateTimeFormat(locale === 'ja' ? 'ja-JP' : 'en-US', {
+  year: 'numeric',
+  month: 'short',
+});
+const pushed = dateFmt.format(new Date(repo.pushedAt));
+---
+
+<a
+  href={repo.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group block rounded-sm border border-zinc-800 p-3 transition-colors hover:border-amber-400/60 hover:bg-zinc-900/50 focus-visible:border-amber-400"
+>
+  <div class="flex items-baseline justify-between gap-3">
+    <span class="font-medium text-zinc-200 group-hover:text-amber-400">
+      {repo.name}
+    </span>
+    {
+      repo.isPinned && (
+        <span class="text-[10px] tracking-[0.2em] text-amber-400/70">PINNED</span>
+      )
+    }
+  </div>
+  {
+    repo.description && (
+      <p class="mt-1 line-clamp-2 text-sm text-zinc-400">{repo.description}</p>
+    )
+  }
+  <div class="mt-2 flex items-center gap-3 text-[11px] text-zinc-500">
+    {repo.language && <span>· {repo.language}</span>}
+    {repo.stars > 0 && <span>★ {repo.stars}</span>}
+    <span class="ml-auto">{pushed}</span>
+  </div>
+</a>

@@ -1,0 +1,35 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { profile } from '@/data/profile';
+import type { Locale } from '@/lib/types';
+
+interface Props {
+  current: Locale;
+  switcher: { label: string; href: string };
+}
+
+const { current, switcher } = Astro.props;
+const homeHref = getRelativeLocaleUrl(current, '');
+const altLocale: Locale = current === 'ja' ? 'en' : 'ja';
+const altHref = getRelativeLocaleUrl(altLocale, '');
+---
+
+<header
+  class="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950/85 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/70"
+>
+  <div class="mx-auto flex max-w-2xl items-center justify-between px-6 py-3">
+    <a
+      href={homeHref}
+      class="text-sm tracking-[0.2em] text-zinc-200 transition-colors hover:text-amber-400"
+    >
+      {profile.name.ja.toUpperCase()}
+    </a>
+    <a
+      href={altHref}
+      class="text-xs tracking-[0.25em] text-zinc-500 transition-colors hover:text-amber-400"
+      aria-label={current === 'ja' ? 'Switch to English' : '日本語に切り替え'}
+    >
+      {switcher.label}
+    </a>
+  </div>
+</header>
