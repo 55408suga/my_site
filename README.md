@@ -5,7 +5,7 @@
 
 ## 技術スタック
 
-- **[Astro 5](https://astro.build)** — 静的サイト生成 (出力は 0 KB JS)
+- **[Astro 6](https://astro.build)** — 静的サイト生成 (ハイドレーション JS なし、scroll reveal のインライン script のみ)
 - **TypeScript** (strict + `noUncheckedIndexedAccess`)
 - **[Tailwind CSS v4](https://tailwindcss.com)** — `@tailwindcss/vite` プラグイン経由
 - **[JetBrains Mono Variable](https://www.jetbrains.com/lp/mono/)** — 自己ホスト (Google Fonts 非依存)

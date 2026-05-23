@@ -18,7 +18,7 @@ interface Props {
 
 const { locale, content } = Astro.props;
 const repos = await fetchProjectRepos(profile.repoAllowlist);
-const displayName = locale === 'ja' ? profile.name.ja : profile.name.en;
+const displayName = profile.name[locale];
 ---
 
 <BaseLayout locale={locale} content={content}>
@@ -26,7 +26,12 @@ const displayName = locale === 'ja' ? profile.name.ja : profile.name.en;
   <main>
     <Section id="about" title={content.about.title}>
       <p class="text-xl font-light text-zinc-100">{displayName}</p>
-      <p class="mt-1 text-sm text-zinc-500">{content.about.role}</p>
+      {
+        locale === 'ja' && (
+          <p class="mt-0.5 text-sm text-zinc-500 tracking-wider">{profile.kanjiName}</p>
+        )
+      }
+      <p class="mt-2 text-sm text-zinc-500">{content.about.role}</p>
       <p class="mt-6 text-sm leading-7 text-zinc-300">{content.about.bio}</p>
     </Section>
 

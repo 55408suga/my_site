@@ -41,7 +41,6 @@ export const ja: LocaleContent = {
   },
   switcher: {
     label: 'EN',
-    href: '/en/',
   },
   footer: {
     rights: '© Kazushi Suga',

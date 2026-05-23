@@ -5,13 +5,14 @@ import type { Locale } from '@/lib/types';
 
 interface Props {
   current: Locale;
-  switcher: { label: string; href: string };
+  switcher: { label: string };
 }
 
 const { current, switcher } = Astro.props;
 const homeHref = getRelativeLocaleUrl(current, '');
 const altLocale: Locale = current === 'ja' ? 'en' : 'ja';
 const altHref = getRelativeLocaleUrl(altLocale, '');
+const displayName = profile.name[current];
 ---
 
 <header
@@ -22,7 +23,7 @@ const altHref = getRelativeLocaleUrl(altLocale, '');
       href={homeHref}
       class="text-sm tracking-[0.2em] text-zinc-200 transition-colors hover:text-amber-400"
     >
-      {profile.name.ja.toUpperCase()}
+      {displayName.toUpperCase()}
     </a>
     <a
       href={altHref}

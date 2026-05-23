@@ -100,46 +100,80 @@ async function fetchOneRepo(name: string): Promise<RepoCard | null> {
   };
 }
 
+function isRepoCard(x: unknown): x is RepoCard {
+  if (typeof x !== 'object' || x === null) return false;
+  const r = x as Record<string, unknown>;
+  return (
+    typeof r.name === 'string' &&
+    typeof r.url === 'string' &&
+    typeof r.pushedAt === 'string' &&
+    typeof r.stars === 'number' &&
+    typeof r.isPinned === 'boolean'
+  );
+}
+
+function loadCacheFallback(): RepoCard[] {
+  if (!fs.existsSync(REPOS_JSON)) return [];
+  try {
+    const raw = fs.readFileSync(REPOS_JSON, 'utf8');
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      console.warn('[github] cache is not an array; ignoring');
+      return [];
+    }
+    return parsed.filter(isRepoCard);
+  } catch (e) {
+    console.warn('[github] failed to parse cache:', e);
+    return [];
+  }
+}
+
+// Single-build cache: PortfolioPage runs once per locale page; the
+// allowlist is identical across calls (sourced from profile.ts), so we
+// share the result. On failure we reset the cache so dev-mode rebuilds
+// can retry.
 let cached: Promise<RepoCard[]> | null = null;
 
 export function fetchProjectRepos(allowlist: readonly string[]): Promise<RepoCard[]> {
-  if (!cached) cached = doFetch(allowlist);
+  if (!cached) {
+    cached = doFetch(allowlist).catch((err) => {
+      cached = null;
+      console.warn('[github] live fetch failed:', err);
+      return loadCacheFallback();
+    });
+  }
   return cached;
 }
 
 async function doFetch(allowlist: readonly string[]): Promise<RepoCard[]> {
-  try {
-    const [pinned, listed] = await Promise.all([
-      fetchPinned(),
-      Promise.all(allowlist.map((n) => fetchOneRepo(n))).then((xs) =>
-        xs.filter((x): x is RepoCard => x !== null),
-      ),
-    ]);
+  const [pinned, listed] = await Promise.all([
+    fetchPinned(),
+    Promise.all(allowlist.map((n) => fetchOneRepo(n))).then((xs) =>
+      xs.filter((x): x is RepoCard => x !== null),
+    ),
+  ]);
 
-    const map = new Map<string, RepoCard>();
-    for (const r of pinned) map.set(r.name, r);
-    for (const r of listed) {
-      const existing = map.get(r.name);
-      if (existing) {
-        existing.isPinned = existing.isPinned || r.isPinned;
-        continue;
-      }
-      map.set(r.name, r);
+  const map = new Map<string, RepoCard>();
+  for (const r of pinned) map.set(r.name, r);
+  for (const r of listed) {
+    const existing = map.get(r.name);
+    if (existing) {
+      map.set(r.name, { ...existing, isPinned: existing.isPinned || r.isPinned });
+      continue;
     }
+    map.set(r.name, r);
+  }
 
-    const sorted = [...map.values()]
-      .sort((a, b) => new Date(b.pushedAt).getTime() - new Date(a.pushedAt).getTime())
-      .slice(0, MAX_REPOS);
+  const sorted = [...map.values()]
+    .sort((a, b) => new Date(b.pushedAt).getTime() - new Date(a.pushedAt).getTime())
+    .slice(0, MAX_REPOS);
 
+  // Only persist when we have real data — preserves any prior cache when
+  // a build runs without a token / rate-limited and would otherwise wipe
+  // the fallback with an empty array.
+  if (sorted.length > 0) {
     fs.mkdirSync(path.dirname(REPOS_JSON), { recursive: true });
     fs.writeFileSync(REPOS_JSON, JSON.stringify(sorted, null, 2));
-    return sorted;
-  } catch (err) {
-    console.warn('[github] live fetch failed, attempting cached fallback:', err);
-    if (fs.existsSync(REPOS_JSON)) {
-      const raw = fs.readFileSync(REPOS_JSON, 'utf8');
-      return JSON.parse(raw) as RepoCard[];
-    }
-    return [];
   }
+  return sorted;
 }

@@ -57,7 +57,6 @@ export interface LocaleContent {
   };
   switcher: {
     label: string;
-    href: string;
   };
   footer: {
     rights: string;
