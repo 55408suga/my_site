@@ -29,30 +29,37 @@
     min-height: 100vh;
     background-color: var(--color-bg);
     /*
-     * Three subtle layers, all CSS-only, all background-attachment: fixed so
-     * they don't smear during scroll:
-     *   1. Amber radial glow near the top centre (signature accent).
-     *   2. Cool indigo radial blob in the lower-left, adds depth.
-     *   3. Dot grid (engineering blueprint feel, 22px spacing).
+     * Four layers, all CSS-only, all background-attachment: fixed so they
+     * don't smear during scroll. Listed top → bottom in z-order:
+     *   1. SVG film-grain noise (feTurbulence, ~6% opacity, 240px tile).
+     *   2. Amber radial glow at top-centre (signature accent, 14%).
+     *   3. Teal radial blob at mid-right (cool counter-accent, 8%).
+     *   4. Indigo radial blob at bottom-left (depth, 10%).
      */
     background-image:
+      url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='1' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.9 0 0 0 0 0.9 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
       radial-gradient(
-        ellipse 900px 480px at 50% -120px,
-        rgba(251, 191, 36, 0.09),
+        ellipse 900px 520px at 50% -120px,
+        rgba(251, 191, 36, 0.14),
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 700px 450px at 110% 40%,
+        rgba(45, 212, 191, 0.08),
         transparent 60%
       ),
       radial-gradient(
-        ellipse 700px 500px at -10% 110%,
-        rgba(99, 102, 241, 0.05),
+        ellipse 850px 600px at -10% 110%,
+        rgba(99, 102, 241, 0.1),
         transparent 60%
-      ),
-      radial-gradient(circle at 1px 1px, rgba(228, 228, 231, 0.05) 1px, transparent 0);
+      );
     background-size:
+      240px 240px,
       auto,
       auto,
-      22px 22px;
-    background-attachment: fixed, fixed, fixed;
-    background-repeat: no-repeat, no-repeat, repeat;
+      auto;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+    background-attachment: fixed, fixed, fixed, fixed;
   }
 
   /* Thin accent stripe at the very top — like a status indicator. */
