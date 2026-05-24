@@ -64,13 +64,13 @@ export interface LocaleContent {
 }
 
 export const SKILLS = [
+  'Go',
   'Python',
   'JavaScript',
   'Java',
-  'Go',
-  'Git',
   'Linux',
   'Docker',
+  'Git',
   'SQL',
   'AWS',
 ] as const;

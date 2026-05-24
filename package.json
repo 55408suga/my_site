@@ -27,7 +27,10 @@
     "typescript": "^5.7.2"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"],
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ],
     "verifyDepsBeforeRun": "off"
   }
 }

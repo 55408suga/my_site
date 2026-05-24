@@ -1,4 +1,6 @@
 ---
+import TechIcon from './TechIcon.astro';
+
 interface Props {
   label: string;
 }
@@ -7,7 +9,11 @@ const { label } = Astro.props;
 ---
 
 <span
-  class="inline-block border border-zinc-800 px-2 py-1 text-xs text-zinc-300 transition-colors hover:border-amber-400/60 hover:text-amber-400"
+  class="group inline-flex items-center gap-1.5 border border-zinc-800 bg-zinc-950/40 px-2.5 py-1 text-xs text-zinc-300 transition-colors hover:border-amber-400/60 hover:bg-zinc-900/60 hover:text-amber-400"
 >
-  {label}
+  <TechIcon
+    name={label}
+    class="h-3.5 w-3.5 text-zinc-500 transition-colors group-hover:text-amber-400"
+  />
+  <span>{label}</span>
 </span>
