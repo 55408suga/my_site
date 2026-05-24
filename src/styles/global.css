@@ -18,25 +18,23 @@
   :root {
     color-scheme: dark;
   }
+  /*
+   * All background layers live on <html> so the viewport canvas is
+   * painted everywhere — including the area below the footer when
+   * scrolled to the bottom of long pages. Putting these on <body>
+   * (with <html> also having a background-color) clipped the paint
+   * to body's box, causing a solid black band at the page bottom.
+   *
+   * Five layers, all CSS-only, all background-attachment: fixed.
+   * Listed top → bottom in z-order:
+   *   1. CRT scanlines (1px every 4px, ~4% opacity) — terminal vibe.
+   *   2. SVG film-grain noise (feTurbulence, ~12% opacity).
+   *   3. Amber radial glow at top-centre  (30% — bold signature accent).
+   *   4. Teal radial blob at mid-right    (18% — cool counter-accent).
+   *   5. Indigo radial blob at bottom-left(22% — depth).
+   */
   html {
     background-color: var(--color-bg);
-  }
-  body {
-    color: var(--color-fg);
-    font-family: var(--font-mono);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    min-height: 100vh;
-    background-color: var(--color-bg);
-    /*
-     * Five layers, all CSS-only, all background-attachment: fixed.
-     * Listed top → bottom in z-order:
-     *   1. CRT scanlines (1px every 4px, ~4% opacity) — terminal vibe.
-     *   2. SVG film-grain noise (feTurbulence, ~12% opacity).
-     *   3. Amber radial glow at top-centre  (30% — bold signature accent).
-     *   4. Teal radial blob at mid-right    (18% — cool counter-accent).
-     *   5. Indigo radial blob at bottom-left(22% — depth).
-     */
     background-image:
       repeating-linear-gradient(
         to bottom,
@@ -69,6 +67,13 @@
       auto;
     background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
     background-attachment: fixed, fixed, fixed, fixed, fixed;
+  }
+  body {
+    color: var(--color-fg);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
   }
 
   /* Thin accent stripe at the very top — like a status indicator. */
