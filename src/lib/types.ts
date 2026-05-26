@@ -50,6 +50,8 @@ export interface LocaleContent {
     title: string;
     label: string;
     empty: string;
+    wipLabel: string;
+    pinnedLabel: string;
   };
   contact: {
     title: string;

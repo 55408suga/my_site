@@ -34,6 +34,8 @@ export const en: LocaleContent = {
     title: 'Projects',
     label: 'Auto-fetched from GitHub',
     empty: 'Could not load repositories.',
+    wipLabel: 'WIP',
+    pinnedLabel: 'PINNED',
   },
   contact: {
     title: 'Contact',

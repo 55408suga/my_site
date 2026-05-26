@@ -4,9 +4,15 @@ import type { Locale, RepoCard } from '@/lib/types';
 interface Props {
   repo: RepoCard;
   locale: Locale;
+  wip: boolean;
+  techs: readonly string[];
+  labels: {
+    wipLabel: string;
+    pinnedLabel: string;
+  };
 }
 
-const { repo, locale } = Astro.props;
+const { repo, locale, wip, techs, labels } = Astro.props;
 const dateFmt = new Intl.DateTimeFormat(locale === 'ja' ? 'ja-JP' : 'en-US', {
   year: 'numeric',
   month: 'short',
@@ -24,19 +30,42 @@ const pushed = dateFmt.format(new Date(repo.pushedAt));
     <span class="font-medium text-zinc-200 group-hover:text-amber-400">
       {repo.name}
     </span>
-    {
-      repo.isPinned && (
-        <span class="text-[10px] tracking-[0.2em] text-amber-400/70">PINNED</span>
-      )
-    }
+    <div class="flex shrink-0 items-center gap-2">
+      {
+        wip && (
+          <span class="inline-flex items-center gap-1 rounded-full border border-amber-300/40 px-1.5 py-0.5 text-[10px] text-amber-300/90">
+            <span class="size-1 rounded-full bg-amber-300 motion-safe:animate-pulse" />
+            {labels.wipLabel}
+          </span>
+        )
+      }
+      {
+        repo.isPinned && (
+          <span class="text-[10px] tracking-[0.2em] text-amber-400/70">
+            {labels.pinnedLabel}
+          </span>
+        )
+      }
+    </div>
   </div>
   {
     repo.description && (
       <p class="mt-1 line-clamp-2 text-sm text-zinc-400">{repo.description}</p>
     )
   }
+  {
+    techs.length > 0 && (
+      <div class="mt-2 flex flex-wrap gap-1.5">
+        {techs.map((t) => (
+          <span class="rounded-full border border-zinc-700/80 bg-zinc-900/40 px-2 py-0.5 text-[10px] text-zinc-400 transition-colors group-hover:border-amber-400/30">
+            {t}
+          </span>
+        ))}
+      </div>
+    )
+  }
   <div class="mt-2 flex items-center gap-3 text-[11px] text-zinc-500">
-    {repo.language && <span>· {repo.language}</span>}
+    {techs.length === 0 && repo.language && <span>· {repo.language}</span>}
     {repo.stars > 0 && <span>★ {repo.stars}</span>}
     <span class="ml-auto">{pushed}</span>
   </div>

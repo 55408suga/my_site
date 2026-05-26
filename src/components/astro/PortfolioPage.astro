@@ -18,6 +18,10 @@ interface Props {
 
 const { locale, content } = Astro.props;
 const repos = await fetchProjectRepos(profile.repoAllowlist);
+const repoLabels = {
+  wipLabel: content.projects.wipLabel,
+  pinnedLabel: content.projects.pinnedLabel,
+};
 const displayName = profile.name[locale];
 ---
 
@@ -86,7 +90,13 @@ const displayName = profile.name[locale];
         ) : (
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {repos.map((repo) => (
-              <RepoCard repo={repo} locale={locale} />
+              <RepoCard
+                repo={repo}
+                locale={locale}
+                wip={profile.wipRepos.includes(repo.name)}
+                techs={profile.repoTechs[repo.name] ?? []}
+                labels={repoLabels}
+              />
             ))}
           </div>
         )

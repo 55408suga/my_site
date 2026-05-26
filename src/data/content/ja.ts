@@ -34,6 +34,8 @@ export const ja: LocaleContent = {
     title: 'Projects',
     label: 'GitHub から自動取得',
     empty: 'リポジトリ情報を取得できませんでした。',
+    wipLabel: '作成中',
+    pinnedLabel: 'ピン留め',
   },
   contact: {
     title: 'Contact',
